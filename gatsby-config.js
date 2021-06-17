@@ -21,9 +21,9 @@ module.exports = {
       twitter: "https://twitter.com/",
     },
     locale: "en",
-    title: `John Doe`,
-    description: `Photography portfolio of John Doe`,
-    author: `@johndoe`,
+    title: `Florence Consulting Demo`,
+    description: `Demo: Contentful + Gatsby`,
+    author: `@_vik`,
   },
   plugins: [
     `gatsby-plugin-postcss`,

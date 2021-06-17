@@ -31,3 +31,7 @@ body {
   margin-bottom: 1rem;
   list-style: disc;
 }
+.content ol {
+  margin-bottom: 1rem;
+  list-style: decimal;
+}

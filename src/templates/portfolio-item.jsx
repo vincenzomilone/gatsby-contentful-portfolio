@@ -78,7 +78,7 @@ export default props => {
                   <h2 className="text-2xl font-extrabold mb-4">{children}</h2>
                 ),
                 [BLOCKS.EMBEDDED_ASSET]: node => (
-                  <div className="flex items-center">
+                  <div className="flex items-center mb-8">
                     {node.data.target.fields && (
                       <img
                         className="mx-auto"
