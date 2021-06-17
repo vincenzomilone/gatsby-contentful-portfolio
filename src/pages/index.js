@@ -11,7 +11,7 @@ const IndexPage = ({ data }) => {
     <Layout>
       <SiteMetadata title="Home" description="Portfolio of John Doe" />
 
-      <Hero />
+      {/* <Hero /> */}
 
       <div className="bg-gray-100 py-12 lg:py-16">
         {data.portfolio && data.portfolio.nodes.length > 0 ? (

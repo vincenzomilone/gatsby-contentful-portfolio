@@ -1,4 +1,7 @@
 import { graphql } from "gatsby"
+import { BLOCKS } from "@contentful/rich-text-types"
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
+
 import Img from "gatsby-image"
 import React from "react"
 import SiteMetadata from "../components/SiteMetadata"
@@ -17,6 +20,7 @@ export default props => {
     summary,
     thumbnail,
     url,
+    bodyRichText,
   } = props.data.item
 
   return (
@@ -59,6 +63,36 @@ export default props => {
           </div>
         </div>
       </div>
+      {bodyRichText && (
+        <div className="container">
+          <div className="content my-4 text-base text-gray-700 whitespace-pre-line">
+            {documentToReactComponents(bodyRichText.json, {
+              renderNode: {
+                [BLOCKS.HEADING_1]: (node, children) => (
+                  <h1 className="text-4xl font-extrabold mb-4">{children}</h1>
+                ),
+                [BLOCKS.HEADING_2]: (node, children) => (
+                  <h2 className="text-3xl font-extrabold mb-4">{children}</h2>
+                ),
+                [BLOCKS.HEADING_3]: (node, children) => (
+                  <h2 className="text-2xl font-extrabold mb-4">{children}</h2>
+                ),
+                [BLOCKS.EMBEDDED_ASSET]: node => (
+                  <div className="flex items-center">
+                    {node.data.target.fields && (
+                      <img
+                        className="mx-auto"
+                        src={node.data.target.fields.file["en-US"].url}
+                        alt={node.data.target.fields.title["en-US"]}
+                      />
+                    )}
+                  </div>
+                ),
+              },
+            })}
+          </div>
+        </div>
+      )}
       {related && (
         <div className="bg-gray-100 py-12 lg:py-16">
           <div className="container">
@@ -102,6 +136,9 @@ export const query = graphql`
         }
       }
       url
+      bodyRichText {
+        json
+      }
     }
   }
 `

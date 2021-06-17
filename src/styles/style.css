@@ -23,3 +23,11 @@ body {
     @apply .px-8;
   }
 }
+
+.content p {
+  margin-bottom: 1rem;
+}
+.content ul {
+  margin-bottom: 1rem;
+  list-style: disc;
+}
