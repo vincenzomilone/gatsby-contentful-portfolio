@@ -17,6 +17,23 @@ exports.createSchemaCustomization = ({ actions }) => {
       thumbnail: ContentfulAsset
       url: String
     }
+    type ContentfulMenuItem implements Node {
+      id: ID!
+      label: String!
+      link: String!
+    }
+    type ContentfulConfig implements Node {
+        id: ID!
+        contentful_id: String!
+        siteTitle: String!
+        siteDescription: String!
+        siteCover: ContentfulAsset
+        menu: [ContentfulMenuItem]!
+        socialFacebook: String!
+        socialInstagram: String!
+        socialPinterest: String!
+        socialTwitter: String!
+    }
   `
   createTypes(typeDefs)
 }

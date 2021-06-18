@@ -27,11 +27,14 @@ body {
 .content p {
   margin-bottom: 1rem;
 }
-.content ul {
+.content ul,
+.content ol {
   margin-bottom: 1rem;
+  margin-left: 1rem;
+}
+.content ul {
   list-style: disc;
 }
 .content ol {
-  margin-bottom: 1rem;
   list-style: decimal;
 }

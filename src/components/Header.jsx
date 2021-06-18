@@ -3,21 +3,24 @@ import React, { useState } from "react"
 import MenuMobile from "./MenuMobile"
 import { FaBars } from "react-icons/fa"
 
+const HEADER_QUERY = graphql`
+  query HeaderQuery {
+    config: contentfulConfig(contentful_id: { eq: "6uA5bWZ6fPHrB1pxJZpMkz" }) {
+      menu {
+        id
+        label
+        link
+      }
+    }
+  }
+`
+
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  const { site } = useStaticQuery(graphql`
-    query {
-      site {
-        data: siteMetadata {
-          menu {
-            name
-            to
-          }
-        }
-      }
-    }
-  `)
+  const {
+    config: { menu },
+  } = useStaticQuery(HEADER_QUERY)
 
   return (
     <div className="container pt-6 pb-12 md:pt-12">
@@ -39,7 +42,7 @@ const Header = () => {
         </button>
 
         <div className="hidden sm:block">
-          {site.data.menu.map((link, key) => (
+          {/* {site.data.menu.map((link, key) => (
             <Link
               key={`menu_desktop_link${key}`}
               className="ml-6 sm:ml-8 text-sm sm:text-base font-medium px-px border-b-2 pb-2 border-transparent text-gray-700 hover:text-gray-800 hover:border-gray-200 transition duration-150 ease-in-out"
@@ -48,14 +51,22 @@ const Header = () => {
             >
               {link.name}
             </Link>
-          ))}
+          ))} */}
+          {menu
+            ? menu.map(item => (
+                <Link
+                  key={item.id}
+                  className="ml-6 sm:ml-8 text-sm sm:text-base font-medium px-px border-b-2 pb-2 border-transparent text-gray-700 hover:text-gray-800 hover:border-gray-200 transition duration-150 ease-in-out"
+                  activeClassName="border-blue-600 text-gray-900 hover:border-blue-600"
+                  to={item.link}
+                >
+                  {item.label}
+                </Link>
+              ))
+            : null}
         </div>
       </div>
-      <MenuMobile
-        isOpen={isMenuOpen}
-        setIsOpen={setIsMenuOpen}
-        links={site.data.menu}
-      />
+      <MenuMobile isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} links={menu} />
     </div>
   )
 }

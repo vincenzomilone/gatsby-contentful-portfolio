@@ -28,21 +28,21 @@ const MenuMobile = ({ links, isOpen, setIsOpen }) => {
     <Overlay isOpen={isOpen} setIsOpen={setIsOpen}>
       <div className="container flex flex-col justify-center">
         <ul className="text-center">
-          {links.map((link, key) => (
+          {links.map(link => (
             <motion.li
               className="my-3"
               animate={isOpen ? "open" : "closed"}
-              custom={key}
-              key={`menu_mobile_link${key}`}
+              custom={link.id}
+              key={`menu_mobile_link_${link.id}`}
               variants={menuItem}
             >
               <Link
                 className="font-semibold text-4xl text-white"
                 activeClassName="text-blue-500"
-                to={link.to}
+                to={link.link}
                 onClick={() => setIsOpen(false)}
               >
-                {link.name}
+                {link.label}
               </Link>
             </motion.li>
           ))}

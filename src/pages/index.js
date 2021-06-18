@@ -7,11 +7,15 @@ import Newsletter from "../components/Newsletter"
 import SiteMetadata from "../components/SiteMetadata"
 
 const IndexPage = ({ data }) => {
+  const { config } = data
   return (
     <Layout>
-      <SiteMetadata title="Home" description="Portfolio of John Doe" />
-
-      {/* <Hero /> */}
+      {config && (
+        <SiteMetadata
+          title={config.siteTitle}
+          description={config.siteDescription}
+        />
+      )}
 
       <div className="bg-gray-100 py-12 lg:py-16">
         {data.portfolio && data.portfolio.nodes.length > 0 ? (
@@ -33,6 +37,14 @@ export const query = graphql`
       nodes {
         ...PortfolioCard
       }
+    }
+    config: contentfulConfig(contentful_id: { eq: "6uA5bWZ6fPHrB1pxJZpMkz" }) {
+      siteTitle
+      siteDescription
+      socialFacebook
+      socialInstagram
+      socialPinterest
+      socialTwitter
     }
   }
 `
