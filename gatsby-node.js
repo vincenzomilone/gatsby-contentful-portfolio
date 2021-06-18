@@ -29,10 +29,10 @@ exports.createSchemaCustomization = ({ actions }) => {
         siteDescription: String!
         siteCover: ContentfulAsset
         menu: [ContentfulMenuItem]!
-        socialFacebook: String!
-        socialInstagram: String!
-        socialPinterest: String!
-        socialTwitter: String!
+        socialFacebook: String
+        socialInstagram: String
+        socialPinterest: String
+        socialTwitter: String
     }
   `
   createTypes(typeDefs)
